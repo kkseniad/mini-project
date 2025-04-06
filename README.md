@@ -1,4 +1,4 @@
-# Card of the day
+# Card of the Day
 
 Dynamic web application
 
