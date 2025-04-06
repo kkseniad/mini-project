@@ -2,7 +2,7 @@
 
 Dynamic web application
 
-##Usage
+## Usage
 - Visit the app in your browser.
 - Click "Draw a Card" to receive your tarot prediction for the day.
 - View your card along with a short interpretation based on traditional tarot meanings and random quote.
