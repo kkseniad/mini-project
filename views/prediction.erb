@@ -1,20 +1,21 @@
-<h1>Your card is <%= @user_card.gsub("_"," ") %></h1>
+<h1>Your card: <%= @user_card.gsub("_"," ") %></h1>
 
 <img src="/cards/<%= @user_card %>.jpg" alt="card" />
 
 
-<h2>Meaning of your card</h2>
+<h2>Meaning of Your Card</h2>
 <div><cite><%= @meaning %></cite></div>
 
-<h2>Quote for you</h2>
+<h2>Quote for You</h2>
 <div><%= @quote %></div>
+
 
 <div class="buttons">
 <form action="/" method="get">
-  <button type="submit">Go back</button>
+  <button type="submit">Go Back</button>
 </form>
 
 <form action="/prediction" method="get">
-  <button type="submit">Draw another card</button>
+  <button type="submit">Draw Another Card</button>
 </form>
 </div>

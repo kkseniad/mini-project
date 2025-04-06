@@ -43,7 +43,7 @@ get("/prediction") do
 
   parsed_data = JSON.parse(raw_response)
 
-  num_quote = rand(1...50)
+  num_quote = rand(0..49)
 
   @quote = parsed_data[num_quote].fetch("h")
  

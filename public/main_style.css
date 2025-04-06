@@ -10,6 +10,10 @@ h1, h2 {
   color: #e0b3ff;
 }
 
+h2 {
+  font-size: 2em;
+}
+
 img {
   width: 300px;
   border-radius: 8px;
@@ -19,7 +23,7 @@ img {
 
 div {
   margin-bottom: 20px;
-  font-size: 1.2em;
+  font-size: 1.6em;
   color: #ccc;
 }
 
@@ -31,18 +35,17 @@ div {
 }
 
 button {
-  background-color: #e0b3ff;  /* Light purple background */
-  color: white;               /* White text */
-  font-size: 1.2em;           /* Slightly larger text */
-  padding: 15px 30px;         /* Add space around the text */
-  border: none;               /* Remove default border */
-  border-radius: 10px;        /* Rounded corners */
-  cursor: pointer;            /* Change cursor to pointer */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  background-color: #e0b3ff;
+  color: white;
+  font-size: 1em;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;     
+  cursor: pointer;
 }
 
 .buttons {
   display: flex;
   justify-content: center;
-  margin: 10px;
+  gap: 20px;
 }
