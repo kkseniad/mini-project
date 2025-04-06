@@ -1,116 +1,52 @@
 require "sinatra"
 require "sinatra/reloader"
+require "http"
 
 get("/") do
   erb(:homepage)
 end
 
 get("/prediction") do
-  MAJOR_ARCANA = [
-  "The Fool",
-  "The Magician",
-  "The High Priestess",
-  "The Empress",
-  "The Emperor",
-  "The Hierophant",
-  "The Lovers",
-  "The Chariot",
-  "Strength",
-  "The Hermit",
-  "Wheel of Fortune",
-  "Justice",
-  "The Hanged Man",
-  "Death",
-  "Temperance",
-  "The Devil",
-  "The Tower",
-  "The Star",
-  "The Moon",
-  "The Sun",
-  "Judgement",
-  "The World"
-]
-  minor_sym = [:swords, :cups, :wands, :pentacles]
-  
-  MINOR_ARCANA = {
-  swords: [
-    "Ace of Swords",
-    "Two of Swords",
-    "Three of Swords",
-    "Four of Swords",
-    "Five of Swords",
-    "Six of Swords",
-    "Seven of Swords",
-    "Eight of Swords",
-    "Nine of Swords",
-    "Ten of Swords",
-    "Page of Swords",
-    "Knight of Swords",
-    "Queen of Swords",
-    "King of Swords"
-  ],
-  
-  cups: [
-    "Ace of Cups",
-    "Two of Cups",
-    "Three of Cups",
-    "Four of Cups",
-    "Five of Cups",
-    "Six of Cups",
-    "Seven of Cups",
-    "Eight of Cups",
-    "Nine of Cups",
-    "Ten of Cups",
-    "Page of Cups",
-    "Knight of Cups",
-    "Queen of Cups",
-    "King of Cups"
-  ],
-  
-  wands: [
-    "Ace of Wands",
-    "Two of Wands",
-    "Three of Wands",
-    "Four of Wands",
-    "Five of Wands",
-    "Six of Wands",
-    "Seven of Wands",
-    "Eight of Wands",
-    "Nine of Wands",
-    "Ten of Wands",
-    "Page of Wands",
-    "Knight of Wands",
-    "Queen of Wands",
-    "King of Wands"
-  ],
-  
-  pentacles: [
-    "Ace of Pentacles",
-    "Two of Pentacles",
-    "Three of Pentacles",
-    "Four of Pentacles",
-    "Five of Pentacles",
-    "Six of Pentacles",
-    "Seven of Pentacles",
-    "Eight of Pentacles",
-    "Nine of Pentacles",
-    "Ten of Pentacles",
-    "Page of Pentacles",
-    "Knight of Pentacles",
-    "Queen of Pentacles",
-    "King of Pentacles"
-  ]
-  }
+  CARDS = {
+  "The_Fool" => "A new beginning, spontaneity, and free spirit.",
+  "The_Magician" => "Manifestation, resourcefulness, and inspired action.",
+  "The_High Priestess" => "Intuition, secrets, and the subconscious mind.",
+  "The_Empress" => "Abundance, nurturing, and fertility.",
+  "The_Emperor" => "Authority, structure, and fatherly guidance.",
+  "The_Hierophant" => "Tradition, spiritual wisdom, and conformity.",
+  "The_Lovers" => "Love, harmony, choices, and relationships.",
+  "The_Chariot" => "Control, willpower, success through determination.",
+  "Strength" => "Courage, inner strength, and compassion.",
+  "The_Hermit" => "Introspection, solitude, and inner guidance.",
+  "Wheel_of_Fortune" => "Change, cycles, and destiny.",
+  "Justice" => "Fairness, truth, and law.",
+  "The_Hanged_Man" => "Pause, surrender, and a new perspective.",
+  "Death" => "Endings, transformation, and new beginnings.",
+  "Temperance" => "Balance, moderation, and harmony.",
+  "The_Devil" => "Temptation, addiction, and materialism.",
+  "The_Tower" => "Sudden change, upheaval, and awakening.",
+  "The_Star" => "Hope, inspiration, and serenity.",
+  "The_Moon" => "Illusion, intuition, and the unknown.",
+  "The_Sun" => "Joy, success, and positivity.",
+  "Judgement" => "Reflection, reckoning, and awakening.",
+  "The_World" => "Completion, achievement, and fulfillment."
+}
 
-  get_arcane = rand(0..1)
 
-  if get_arcane == 0
-    @user_card = MAJOR_ARCANA.sample
-  else
-    suit = minor_sym.sample
-    @user_card = MINOR_ARCANA[suit].sample
-  end
+  @user_card = CARDS.keys.sample
 
+  @meaning = CARDS[@user_card]
+
+  api_url = "https://zenquotes.io/api/quotes"
+
+  raw_response = HTTP.get(api_url)
+
+  parsed_data = JSON.parse(raw_response)
+
+  num_quote = rand(1...50)
+
+  @quote = parsed_data[num_quote].fetch("h")
+ 
   erb(:prediction)
 
 end
